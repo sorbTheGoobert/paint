@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint :o</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
+            font-family: "Open Sans", sans-serif;
+            font-weight: 500;
+            font-size: 18px;
         }
         body{
             margin: 0;
@@ -24,12 +30,122 @@
             display: flex;
             flex-direction: column;
         }
+        .buttonContainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            background-color: transparent;
+            border: 1px solid black;
+            border-radius: 0;
+            width: 100%;
+        }
+        .dropdown {
+            display: none;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            width: calc(1440px / 4 - 30px);
+            padding: 10px 15px;
+            justify-content: space-around;
+            border: 1px solid black;
+            background-color: white;
+        }
+        .dropdown input {
+            border: 0;
+            border-bottom: 1px solid black;
+            font-size: 14px;
+            font-weight: 500;
+            /* color: grey; */
+            text-align: center;
+            width: 50%;
+        }
+        .label {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        #width {
+            width: 100%;
+        }
+        #color {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 10px;
+        }
+        #BGcolor {
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <button onclick="drawingBoard.clear()">clear</button>
+        <div class="buttonContainer">
+            <button onclick="downloadImage()" class="button">save</button>
+            <button onclick="dropColor()" class="button" id="colorButton">color</button>
+            <button onclick="dropWidth()" class="button" id="widthButton">width</button>
+            <button onclick="dropBackground()" class="button" id="backgroundButton">background color</button>
+            <button onclick="drawingBoard.clear()" class="button">clear</button>
+        </div>
         <canvas id="canvas" onmousedown="isheld(event)" onmouseup="notheld(event)" onmousemove="checkMousePos(event)"></canvas>
+    </div>
+    <div>
+        <div class="dropdown" id="colorDropDown">
+            <div id="color"></div>
+            <div class="label">
+                <label>
+                    R
+                    <input type="number" placeholder="0" id="red" onchange="changeColor()">
+                </label>
+                <label>
+                    G
+                    <input type="number" placeholder="0" id="green" onchange="changeColor()">
+                </label>
+                <label>
+                    B
+                    <input type="number" placeholder="0" id="blue" onchange="changeColor()">
+                </label>
+                <label>
+                    A
+                    <input type="number" placeholder="1" id="alpha" onchange="changeColor()">
+                </label>
+            </div>
+        </div>
+        <div class="dropdown" id="backgroundDropDown">
+            <div id="BGcolor"></div>
+            <div class="label">
+                <label>
+                    R
+                    <input type="number" placeholder="255" id="BGred" onchange="changeBGColor()">
+                </label>
+                <label>
+                    G
+                    <input type="number" placeholder="255" id="BGgreen" onchange="changeBGColor()">
+                </label>
+                <label>
+                    B
+                    <input type="number" placeholder="255" id="BGblue" onchange="changeBGColor()">
+                </label>
+                <label>
+                    A
+                    <input type="number" placeholder="0" id="BGalpha" onchange="changeBGColor()">
+                </label>
+            </div>
+        </div>
+        <div class="dropdown width" id="widthDropDown">
+            <input type="number" id="width" placeholder="5" onchange="changeWidth()">
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>
