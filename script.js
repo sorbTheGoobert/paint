@@ -104,7 +104,7 @@ function changeColor() {
     document.getElementById("color").style.backgroundColor = `rgba(${r}, ${g}, ${b}, ${a})`;
 }
 
-var bgr, bgg, bgb, bga;
+var bgr = 255, bgg = 255, bgb = 255, bga = 255;
 function changeBGColor() {
     bgr = document.getElementById("BGred").value;
     bgg = document.getElementById("BGgreen").value;
