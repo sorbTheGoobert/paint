@@ -20,10 +20,17 @@
             border: 1px solid black;
             margin: 0 auto;
         }
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
+    <div class="container">
+        <button onclick="drawingBoard.clear()">clear</button>
+        <canvas id="canvas" onmousedown="isheld(event)" onmouseup="notheld(event)" onmousemove="checkMousePos(event)"></canvas>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>
