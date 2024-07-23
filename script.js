@@ -13,30 +13,41 @@ var drawingBoard = {
         ctx.clearRect(0, 0, this.width, this.height);
         ctx.fillStyle = `rgba(${bgr}, ${bgg}, ${bgb}, ${bga})`;
         ctx.fillRect(0, 0, drawingBoard.width, drawingBoard.height);
+        document.getElementById("test").src = drawingBoard.saves[amountOfMousePress].src;
     }
+}
+let saveURL = new Image(1440, 900);
+function notheld(event) {
+    held = false;
+    saveURL.src = canvas.toDataURL("image/png");
+    drawingBoard.saves[amountOfMousePress] = saveURL;
+    // console.log(saveURL);
+    document.getElementById("test").src = drawingBoard.saves[amountOfMousePress].src;
+    amountOfMousePress++;
+    if (drawingBoard.saves[amountOfMousePress] == drawingBoard.saves[amountOfMousePress - 1]) {
+        console.log(true);
+    }
+    console.log(amountOfMousePress);
 }
 
 function back() {
     amountOfMousePress--;
     if (amountOfMousePress < 0) {
-        amountOfMousePress += 10;
+        amountOfMousePress = 0;
     }
-    drawingBoard = drawingBoard.saves[amountOfMousePress];
+    drawingBoard.clear();
+    document.getElementById("test").src = String(drawingBoard.saves[amountOfMousePress].src);
+    ctx.drawImage(drawingBoard.saves[amountOfMousePress], 0, 0, 1440, 900);
+    console.log(String(drawingBoard.saves[amountOfMousePress].src));
+    if (drawingBoard.saves[amountOfMousePress].src == drawingBoard.saves[amountOfMousePress - 1].src){
+        console.log("true");
+    }
 }
 
 var held = false;
 var amountOfMousePress = 1;
 function isheld(event) {
     held = true;
-}
-function notheld(event) {
-    held = false;
-    drawingBoard.saves[amountOfMousePress] = canvas;
-    amountOfMousePress++;
-    if(amountOfMousePress > 9){
-        amountOfMousePress-=10;
-    }
-    console.log(amountOfMousePress);
 }
 
 function checkMousePos(event) {
