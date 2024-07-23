@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 var drawingBoard = {
     width: 1440,
     height: 900,
+    saves: new Array(10),
     load: function () {
         canvas.width = `${this.width}`;
         canvas.height = `${this.height}`;
@@ -15,12 +16,27 @@ var drawingBoard = {
     }
 }
 
+function back() {
+    amountOfMousePress--;
+    if (amountOfMousePress < 0) {
+        amountOfMousePress += 10;
+    }
+    drawingBoard = drawingBoard.saves[amountOfMousePress];
+}
+
 var held = false;
+var amountOfMousePress = 1;
 function isheld(event) {
     held = true;
 }
 function notheld(event) {
     held = false;
+    drawingBoard.saves[amountOfMousePress] = canvas;
+    amountOfMousePress++;
+    if(amountOfMousePress > 9){
+        amountOfMousePress-=10;
+    }
+    console.log(amountOfMousePress);
 }
 
 function checkMousePos(event) {
@@ -129,7 +145,7 @@ function downloadImage() {
     // Set the link to the image so that when clicked, the image begins downloading
     a.href = dataURL
     // Specify the image filename
-    a.download = 'canvas-download.jpeg';
+    a.download = 'canvas-drawing .jpeg';
     // Click on the link to set off download
     a.click();
 }
