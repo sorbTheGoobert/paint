@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paint :o</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -14,35 +16,40 @@
             font-weight: 500;
             font-size: 18px;
         }
-        body{
+
+        body {
             margin: 0;
             width: 100vw;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: scroll;
         }
+
         canvas {
             border: 1px solid black;
             margin: 0 auto;
         }
+
         .container {
             display: flex;
             flex-direction: column;
         }
+
         .buttonContainer {
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: space-between;
         }
+
         .button {
             background-color: transparent;
             border: 1px solid black;
             border-radius: 0;
             width: 100%;
         }
+
         .dropdown {
             display: none;
             position: absolute;
@@ -54,6 +61,7 @@
             border: 1px solid black;
             background-color: white;
         }
+
         .dropdown input {
             border: 0;
             border-bottom: 1px solid black;
@@ -63,25 +71,30 @@
             text-align: center;
             width: 50%;
         }
+
         .label {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
+
         label {
             display: flex;
             justify-content: space-around;
             align-items: center;
         }
+
         #width {
             width: 100%;
         }
+
         #color {
             width: 50px;
             height: 50px;
             background-color: black;
             border-radius: 10px;
         }
+
         #BGcolor {
             width: 50px;
             height: 50px;
@@ -90,6 +103,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="buttonContainer">
@@ -97,10 +111,11 @@
             <button onclick="dropColor()" class="button" id="colorButton">color</button>
             <button onclick="dropWidth()" class="button" id="widthButton">width</button>
             <button onclick="dropBackground()" class="button" id="backgroundButton">background color</button>
-            <button onclick="back()" class="button">back</button>
+            <button onclick="dropTools()" class="button" id="toolButton">Tools</button>
             <button onclick="drawingBoard.clear()" class="button">clear</button>
         </div>
-        <canvas id="canvas" onmousedown="isheld(event)" onmouseup="notheld(event)" onmousemove="checkMousePos(event)"></canvas>
+        <canvas id="canvas" onmousedown="isheld(event)" onmouseup="notheld(event)"
+            onmousemove="checkMousePos(event)"></canvas>
     </div>
     <div>
         <div class="dropdown" id="colorDropDown">
@@ -145,13 +160,21 @@
                 </label>
             </div>
         </div>
-        <div class="dropdown width" id="widthDropDown">
+        <div class="dropdown" id="widthDropDown">
             <input type="number" id="width" placeholder="5" onchange="changeWidth()">
         </div>
-    </div>
-    <div>
-        <img src="" id="test">
-    </div>
-    <script src="./script.js"></script>
+        <div class="dropdown" id="toolDropDown">
+            <div class="label">
+                <select id="tool" onchange="changeTool()">
+                    <option value="brush">brush</option>
+                    <option value="eraser">eraser</option>
+                    <option value="line">line</option>
+                    <option value="square">square</option>
+                    <option value="circle">circle</option>
+                </select>
+            </div>
+        </div>
+        <script src="./script.js"></script>
 </body>
+
 </html>
